@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Memories</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+        .gallery {
+            display: flex;
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+        }
+        .photo-container {
+            display: flex;
+            align-items: center;
+            animation: scroll 10s linear forwards;
+            position: relative;
+        }
+        .photo {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.5s ease-in-out, box-shadow 0.5s;
+        }
+        .photo:hover {
+            transform: scale(1.1);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .hidden {
+            display: none;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff4081;
+            color: white;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .message:hover {
+            background-color: #e60073;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+        @keyframes scroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="photo-container" id="photoContainer">
+            <img src="10.jpg" class="photo" alt="Photo 1">
+            <img src="11.jpg" class="photo" alt="Photo 2">
+            <img src="12.jpg" class="photo" alt="Photo 3">
+            <img src="13.jpg" class="photo" alt="Photo 4">
+            <img src="14.jpg" class="photo" alt="Photo 5">
+        </div>
+    </div>
+    <button class="message hidden" id="messageButton">I have something for you ❤️</button>
+    <div class="footer">This website was created by Anindya for his beautiful girlfriend Aditi (Betu) ❤️</div>
+    <script>
+        setTimeout(() => {
+            document.getElementById('messageButton').classList.remove('hidden');
+        }, 10000); // Show button after 10 seconds (when photos have passed)
+
+        document.getElementById('messageButton').addEventListener('click', () => {
+            window.location.href = 'letter.html';
+        });
+    </script>
+</body>
+</html>

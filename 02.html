@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
+    <style>
+        body {
+            background-color: #ffe6e6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Georgia', serif;
+            text-align: center;
+        }
+        .question {
+            font-size: 28px;
+            font-weight: bold;
+            color: #d6336c;
+            margin-bottom: 20px;
+        }
+        .options button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .yes-btn {
+            background-color: #ff69b4;
+            color: white;
+        }
+        .no-btn {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        .video-container {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="bgMusic" autoplay loop>
+        <source src="s1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="question">Will you be my Valentine? ❤️</div>
+    <div class="options">
+        <button class="yes-btn" onclick="playVideo()">Yes</button>
+        <button class="no-btn" onclick="removeNo()" id="noBtn">No</button>
+    </div>
+    
+    <div class="video-container" id="videoContainer">
+        <video width="400" controls autoplay>
+            <source src="valentine-video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <script>
+        function removeNo() {
+            document.getElementById("noBtn").remove();
+        }
+        
+        function playVideo() {
+            document.getElementById("videoContainer").style.display = "block";
+            document.getElementById("bgMusic").pause();
+        }
+    </script>
+</body>
+</html>

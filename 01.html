@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Page</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .quote {
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        .sub-quote {
+            font-size: 16px;
+            font-weight: normal;
+            position: relative;
+            z-index: 2;
+        }
+        .question {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .options {
+            margin-top: 10px;
+            display: flex;
+            gap: 20px;
+        }
+        .option-btn {
+            background-color: white;
+            border: 2px solid black;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 5s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-50px); opacity: 0.6; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        .bubble {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: rise 6s infinite ease-in-out;
+        }
+        @keyframes rise {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="quote">I am very happy that you never cheat me and obeyed my order Dear Betu</p>
+        <p class="sub-quote">obsily obeyed my order cause i am your boss</p>
+    </div>
+    <div class="question">Are you chapri?</div>
+    <div class="options">
+        <button id="yes-btn" class="option-btn" onclick="location.href='02.html'">Yes</button>
+        <button id="no-btn" class="option-btn" onclick="location.href='no.html'">No</button>
+    </div>
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.style.left = Math.random() * 100 + 'vw';
+            bubble.style.animationDuration = Math.random() * 4 + 3 + 's';
+            document.body.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 6000);
+        }
+        setInterval(createHeart, 70);
+        setInterval(createBubble, 1000);
+        
+        document.addEventListener('mousemove', function(event) {
+            const yesBtn = document.getElementById('yes-btn');
+            const noBtn = document.getElementById('no-btn');
+            const yesRect = yesBtn.getBoundingClientRect();
+            const noRect = noBtn.getBoundingClientRect();
+            
+            if (event.clientX >= yesRect.left && event.clientX <= yesRect.right && 
+                event.clientY >= yesRect.top && event.clientY <= yesRect.bottom) {
+                yesBtn.style.backgroundColor = 'green';
+                noBtn.style.backgroundColor = 'white';
+            } else if (event.clientX >= noRect.left && event.clientX <= noRect.right && 
+                event.clientY >= noRect.top && event.clientY <= noRect.bottom) {
+                noBtn.style.backgroundColor = 'red';
+                yesBtn.style.backgroundColor = 'white';
+            } else {
+                yesBtn.style.backgroundColor = 'white';
+                noBtn.style.backgroundColor = 'white';
+            }
+        });
+    </script>
+</body>
+</html>

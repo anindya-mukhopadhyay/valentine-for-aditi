@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Page</title>
+    <style>
+        body {
+            background-color: #ffdde1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        .emoji {
+            font-size: 100px;
+            transition: all 0.05s;
+        }
+        .message {
+            font-size: 24px;
+            font-weight: bold;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            text-align: center;
+            animation: scrollUp 5s linear forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        @keyframes scrollUp {
+            from { top: 50%; }
+            to { top: -10%; opacity: 0; }
+        }
+        .question-box {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .options {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .option-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.1s;
+        }
+        .yes-btn {
+            background-color: pink;
+        }
+        .no-btn {
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="emoji" id="emoji">😐</div>
+    <div class="message" id="message"></div>
+    <div class="question-box" id="questionBox">
+        <div class="question">Valobasis amk?</div>
+        <div class="options">
+            <button class="option-btn yes-btn" onclick="location.href='03.html'">Yes</button>
+            <button class="option-btn no-btn" id="no-btn">No</button>
+        </div>
+    </div>
+    <script>
+        // Repeating "Aditi You are chapri" 1000 times in vertical order
+        let messageElement = document.getElementById('message');
+        for (let i = 0; i < 1000; i++) {
+            let line = document.createElement('div');
+            line.innerText = "Aditi You are chapri";
+            messageElement.appendChild(line);
+        }
+        
+        setTimeout(() => {
+            document.getElementById('questionBox').style.display = 'flex';
+            messageElement.style.display = 'none';
+        }, 5000);
+        
+        document.addEventListener('mousemove', function(event) {
+            const yesBtn = document.querySelector('.yes-btn');
+            const noBtn = document.getElementById('no-btn');
+            const emoji = document.getElementById('emoji');
+            const yesRect = yesBtn.getBoundingClientRect();
+            const noRect = noBtn.getBoundingClientRect();
+            
+            // Make emoji's eyes follow the cursor
+            if (event.clientX >= yesRect.left && event.clientX <= yesRect.right && 
+                event.clientY >= yesRect.top && event.clientY <= yesRect.bottom) {
+                emoji.innerHTML = '😁🥳';
+            } else if (event.clientX >= noRect.left && event.clientX <= noRect.right && 
+                event.clientY >= noRect.top && event.clientY <= noRect.bottom) {
+                emoji.innerHTML = '😨😭🥺';
+            } else {
+                emoji.innerHTML = '😐🤔';
+            }
+            
+            // Move No button away from cursor with reduced distance
+            const distanceX = event.clientX - noRect.left;
+            const distanceY = event.clientY - noRect.top;
+            if (Math.abs(distanceX) < 80 && Math.abs(distanceY) < 80) {
+                let newX = Math.random() * (window.innerWidth - noRect.width);
+                let newY = Math.random() * (window.innerHeight - noRect.height);
+                noBtn.style.left = `${newX}px`;
+                noBtn.style.top = `${newY}px`;
+            }
+        });
+        
+        document.getElementById('no-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('ERROR: I know you love me ❤️');
+        });
+    </script>
+</body>
+</html>
